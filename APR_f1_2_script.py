@@ -592,7 +592,7 @@ plt.legend()
 plt.xlabel('t(secs)')
 plt.ylabel(' average switch state <x(t)>')
 #plt.show()   
-f9.savefig("K_t.pdf" ) 
+f9.savefig("average_x_t.pdf" ) 
 
 ##Compute graph properties for the overall network
 ##compute the average clustering of the network
