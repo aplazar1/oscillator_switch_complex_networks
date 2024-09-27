@@ -6,7 +6,7 @@ Created on Fri Sep 27 10:57:58 2024
 @author: aplazar1
 """
 
-## Figure 1 Script for Complex Network Oscillaotr switch paper
+## Figure 1 Script for Complex Network Oscillator switch paper
 ##ER graphs
 
 ##Note: Here I corrected the code for mistakes found in normalization of coupling constants
@@ -196,6 +196,10 @@ for i in range(G1.number_of_nodes()):
                 #print(H.edges)
                 switch_switch_subgraph=nx.compose(switch_switch_subgraph, H)
 
+##compute and store subgraph parameters
+ER_p_K_r_theta_subgraph_log = open("ER_p_k_r_theta_9_26_24_subgraph_parameters_log.txt", "a")
+ER_p_K_r_theta_subgraph_log.write("rep-%01d"%(rep))
+ER_p_K_r_theta_subgraph_log.write("\n")
 ##1 oscillator-oscillator subgraph         
 ###draw the oscillator-oscillator subgraph with a circular layout
 print("oscillator_oscillator_subgraph number of  nodes and edges")
@@ -211,28 +215,46 @@ figure1.savefig("oscillator-oscillator subgraph.pdf" )
 
 ##compute descriptive grapoh properties for subgraph
 C1=nx.average_clustering(oscillator_oscillator_subgraph)
-print("C=") 
+print("C1") 
 print(C1) 
-print("\n")   
+print("\n")  
+ER_p_K_r_theta_subgraph_log.write("oscillator_oscillator_subgraph")
+ER_p_K_r_theta_subgraph_log.write("\n")
+ER_p_K_r_theta_subgraph_log.write("C1")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(C1))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 if nx.is_connected(oscillator_oscillator_subgraph):
     l1=nx.average_shortest_path_length(oscillator_oscillator_subgraph)
     print("l1")
     print(l1)
     print("\n")
+    ER_p_K_r_theta_subgraph_log.write("l1")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write(str(l1))
+    ER_p_K_r_theta_subgraph_log.write("\n") 
 
 
 ##print max degree
 degree_sequence = sorted((d for n, d in oscillator_oscillator_subgraph.degree()), reverse=True)
 kmax1 = max(degree_sequence)
-print("kmax1=")
+print("kmax1")
 print(kmax1)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("kmax1")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(kmax1))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 louvain_modularity1=nx.community.modularity(oscillator_oscillator_subgraph, nx.community.louvain_communities(oscillator_oscillator_subgraph))
 print("louvain_modularity1=")
 print(louvain_modularity1)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("louvain_modularity1")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(louvain_modularity1))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 degree_list=[]
 for node in oscillator_oscillator_subgraph.nodes():
@@ -241,7 +263,11 @@ for node in oscillator_oscillator_subgraph.nodes():
 average_degree_of_graph1=np.sum(degree_list)/len(oscillator_oscillator_subgraph.nodes())
 print("average_degree_of_graph1=") 
 print(average_degree_of_graph1) 
-print("\n")        
+print("\n")   
+ER_p_K_r_theta_subgraph_log.write("average_degree_of_graph1")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(average_degree_of_graph1))
+ER_p_K_r_theta_subgraph_log.write("\n")     
 
 
 ### 2 draw the mixed node connection oscillator-switch subgraph with a circular layout
@@ -257,15 +283,26 @@ nx.draw_networkx(nx.intersection(oscillator_switch_subgraph, switch_oscillator_s
 figure2.savefig("oscillator-switch subgraph.pdf" )
 
 C2=nx.average_clustering(nx.intersection(oscillator_switch_subgraph, switch_oscillator_subgraph))
-print("C2=")   
+print("C2")   
 print(C2)   
-print("\n") 
+print("\n")
+ER_p_K_r_theta_subgraph_log.write("oscillator_switch_subgraph")
+ER_p_K_r_theta_subgraph_log.write("\n") 
+ER_p_K_r_theta_subgraph_log.write("C2")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(C2))
+ER_p_K_r_theta_subgraph_log.write("\n")    
+
 
 if nx.is_connected(nx.intersection(oscillator_switch_subgraph, switch_oscillator_subgraph)):
     l2=nx.average_shortest_path_length(nx.intersection(oscillator_switch_subgraph, switch_oscillator_subgraph))
     print("l2")
     print(l2)
     print("\n")
+    ER_p_K_r_theta_subgraph_log.write("<l2>")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write(str(l2))
+    ER_p_K_r_theta_subgraph_log.write("\n")    
 
 ##nx.is_connected(G)
 
@@ -275,11 +312,19 @@ kmax2 = max(degree_sequence)
 print("kmax2")
 print(kmax2)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("kmax2")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(kmax2))
+ER_p_K_r_theta_subgraph_log.write("\n")    
 
 louvain_modularity2=nx.community.modularity(nx.intersection(oscillator_switch_subgraph, switch_oscillator_subgraph), nx.community.louvain_communities(nx.intersection(oscillator_switch_subgraph, switch_oscillator_subgraph)))
 print("louvain_modularity2")
 print(louvain_modularity2)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("louvain_modularity2")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(louvain_modularity2))
+ER_p_K_r_theta_subgraph_log.write("\n")    
 
 degree_list=[]
 for node in oscillator_switch_subgraph.nodes():
@@ -289,6 +334,10 @@ average_degree_of_graph2=np.sum(degree_list)/len(nx.intersection(oscillator_swit
 print("average_degree_of_graph2")  
 print(average_degree_of_graph2)  
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("average_degree_of_graph2")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(average_degree_of_graph2))
+ER_p_K_r_theta_subgraph_log.write("\n")  
 
 ###draw the switch-switch subgraph with a circular layout
 print('switch-switch subgraph number of nodes and edges')
@@ -306,12 +355,22 @@ C3=nx.average_clustering(switch_switch_subgraph)
 print("C3=")   
 print(C3)   
 print("\n") 
+ER_p_K_r_theta_subgraph_log.write("switch_switch_subgraph")
+ER_p_K_r_theta_subgraph_log.write("\n")
+ER_p_K_r_theta_subgraph_log.write("C3")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(C3))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 if nx.is_connected(switch_switch_subgraph):
     l3=nx.average_shortest_path_length(switch_switch_subgraph)
     print("l3")
     print(l3)
     print("\n")
+    ER_p_K_r_theta_subgraph_log.write("<l3>")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write(str(l3))
+    ER_p_K_r_theta_subgraph_log.write("\n") 
 
 
 ##print max degree
@@ -320,11 +379,19 @@ kmax3 = max(degree_sequence)
 print("kmax3")
 print(kmax3)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("kmax3")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(kmax3))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 louvain_modularity3=nx.community.modularity(switch_switch_subgraph, nx.community.louvain_communities(switch_switch_subgraph))
 print("louvain_modularity3")
 print(louvain_modularity3)
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("louvain_modularity3")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(louvain_modularity3))
+ER_p_K_r_theta_subgraph_log.write("\n") 
 
 degree_list=[]
 for node in switch_switch_subgraph.nodes():
@@ -334,6 +401,11 @@ average_degree_of_graph3=np.sum(degree_list)/len(switch_switch_subgraph.nodes())
 print("average_degree_of_graph3")  
 print(average_degree_of_graph3)  
 print("\n")
+ER_p_K_r_theta_subgraph_log.write("average_degree_of_graph3")
+ER_p_K_r_theta_subgraph_log.write(" ")
+ER_p_K_r_theta_subgraph_log.write(str(average_degree_of_graph3))
+ER_p_K_r_theta_subgraph_log.write("\n") 
+
 
 ##Obtain the overall adjacency matrix to ensure correct simulation
 
@@ -546,8 +618,9 @@ print(kmax)
 print("\n") 
 
 louvain_modularity=nx.community.modularity(G1, nx.community.louvain_communities(G1))
+print("louvain_modularity")
 print(louvain_modularity)
-print(louvain_modularity)
+print("\n") 
 
 degree_list=[]
 for node in G1.nodes():
@@ -639,6 +712,3 @@ ER_p_K_r_theta.close()
 
 ##export the generated graph in multi-line adjacency format for further use
 nx.write_gexf(G1, "ER_9_27_24.gexf")
-
-
-           
