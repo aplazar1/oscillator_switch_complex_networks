@@ -708,7 +708,9 @@ ER_p_K_r_theta.write(str(time_avg_r_x_eq))
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write(str(time_avg_r_theta_eq))
 ER_p_K_r_theta.write("\n")
+
 ER_p_K_r_theta.close()
+ER_p_K_r_theta_subgraph_log.close()
 
 ##export the generated graph in multi-line adjacency format for further use
 nx.write_gexf(G1, "ER_9_27_24.gexf")
