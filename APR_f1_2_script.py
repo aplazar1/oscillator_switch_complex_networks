@@ -234,7 +234,12 @@ if nx.is_connected(oscillator_oscillator_subgraph):
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write(str(l1))
     ER_p_K_r_theta_subgraph_log.write("\n") 
-
+else:
+    ER_p_K_r_theta_subgraph_log.write("<l1>")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write("N/A")
+    print('N/A')
+    
 
 ##print max degree
 degree_sequence = sorted((d for n, d in oscillator_oscillator_subgraph.degree()), reverse=True)
@@ -302,7 +307,12 @@ if nx.is_connected(nx.intersection(oscillator_switch_subgraph, switch_oscillator
     ER_p_K_r_theta_subgraph_log.write("<l2>")
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write(str(l2))
-    ER_p_K_r_theta_subgraph_log.write("\n")    
+    ER_p_K_r_theta_subgraph_log.write("\n")
+else:
+    ER_p_K_r_theta_subgraph_log.write("<l2>")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write("N/A")
+    print('N/A')    
 
 ##nx.is_connected(G)
 
@@ -371,6 +381,11 @@ if nx.is_connected(switch_switch_subgraph):
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write(str(l3))
     ER_p_K_r_theta_subgraph_log.write("\n") 
+else:
+    ER_p_K_r_theta_subgraph_log.write("<l3>")
+    ER_p_K_r_theta_subgraph_log.write(" ")
+    ER_p_K_r_theta_subgraph_log.write("N/A")
+    print('N/A')
 
 
 ##print max degree
@@ -595,60 +610,20 @@ plt.ylabel(' average switch state <x(t)>')
 f9.savefig("average_x_t.pdf" ) 
 
 ##Compute graph properties for the overall network
-##compute the average clustering of the network
-print("overall graph descriptive indices")
-print("C")
-C=nx.average_clustering(G1)
-print(C)  
-print("\n")   
-
-clustering_per_node=nx.clustering(G1, list(G1.nodes()))
-
-if nx.is_connected(G1):
-    print("<l>")
-    l=nx.average_shortest_path_length(G1)
-    print(l)
-    print("\n") 
-
-##print max degree
-degree_sequence = sorted((d for n, d in G1.degree()), reverse=True)
-kmax = max(degree_sequence)
-print("kmax")
-print(kmax)
-print("\n") 
-
-louvain_modularity=nx.community.modularity(G1, nx.community.louvain_communities(G1))
-print("louvain_modularity")
-print(louvain_modularity)
-print("\n") 
-
-degree_list=[]
-for node in G1.nodes():
-    degree=G1.degree[node]
-    degree_list.append(degree)
-average_degree_of_graph=np.sum(degree_list)/len(G1.nodes())
-print("<k> of graph")
-print(average_degree_of_graph)
-print("\n") 
-
-##export simulation params and calculated model and graph proeprties to a tsv file
-set_Beta=0
-
-
 ER_p_K_r_theta = open("ER_p_k_r_theta_9_26_24.tsv", "a")
 ER_p_K_r_theta.write("rep-%01d"%(rep))
 ER_p_K_r_theta.write("\n")
 ER_p_K_r_theta.write("p")
 ER_p_K_r_theta.write("\t")
-ER_p_K_r_theta.write("<k>")
-ER_p_K_r_theta.write("\t")
-ER_p_K_r_theta.write("G kmax")
-ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("C")
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("<l>")
 ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("G kmax")
+ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("louvain_modularity")
+ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("G <k>")
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("K_t_init")
 ER_p_K_r_theta.write("\t")
@@ -673,19 +648,64 @@ ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("<r_theta_eq>")
 ER_p_K_r_theta.write("\n")
 
-
 ER_p_K_r_theta.write(str(p))
 ER_p_K_r_theta.write("\t")
-ER_p_K_r_theta.write(str(average_degree_of_graph))
-ER_p_K_r_theta.write("\t")
-ER_p_K_r_theta.write(str(kmax))
-ER_p_K_r_theta.write("\t")
+
+##compute the average clustering of the network
+print("overall graph descriptive indices")
+print("C")
+C=nx.average_clustering(G1)
+print(C)  
+print("\n")
 ER_p_K_r_theta.write(str(C))
-ER_p_K_r_theta.write("\t")
-ER_p_K_r_theta.write(str(l))
-ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("\t")  
+ 
+
+clustering_per_node=nx.clustering(G1, list(G1.nodes()))
+
+if nx.is_connected(G1):
+    print("<l>")
+    l=nx.average_shortest_path_length(G1)
+    print(l)
+    print("\n") 
+    ER_p_K_r_theta.write(str(l))
+    ER_p_K_r_theta.write("\t")
+else:
+    ER_p_K_r_theta.write("N/A")
+    ER_p_K_r_theta.write("\t")
+    print('N/A')
+    
+##print max degree
+degree_sequence = sorted((d for n, d in G1.degree()), reverse=True)
+kmax = max(degree_sequence)
+print("kmax")
+print(kmax)
+print("\n") 
+ER_p_K_r_theta.write(str(kmax))
+ER_p_K_r_theta.write("\t")  
+
+louvain_modularity=nx.community.modularity(G1, nx.community.louvain_communities(G1))
+print("louvain_modularity")
+print(louvain_modularity)
+print("\n") 
 ER_p_K_r_theta.write(str(louvain_modularity))
-ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("\t")  
+
+degree_list=[]
+for node in G1.nodes():
+    degree=G1.degree[node]
+    degree_list.append(degree)
+average_degree_of_graph=np.sum(degree_list)/len(G1.nodes())
+print("<k> of graph")
+print(average_degree_of_graph)
+print("\n") 
+ER_p_K_r_theta.write(str(average_degree_of_graph))
+ER_p_K_r_theta.write("\t")  
+
+##export simulation params and calculated model and graph proeprties to a tsv file
+set_Beta=0
+
+
 ER_p_K_r_theta.write(str(K_t_init))
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write(str(omega_0))
@@ -714,3 +734,4 @@ ER_p_K_r_theta_subgraph_log.close()
 
 ##export the generated graph in multi-line adjacency format for further use
 nx.write_gexf(G1, "ER_9_27_24.gexf")
+
