@@ -28,7 +28,7 @@ import networkx as nx
 ##model parameters from user input
 print('here we sample X init and omega init from a normal distribution')
 print('input the model parameters below')
-print("enter  simulation parameters: total_nodes, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, M, N, eta, tau, dt, secs, respectively, separated by commas")
+print("enter  simulation parameters: total_nodes, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs, respectively, separated by commas")
 total_nodes, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs =input().split(',')
 
 #convert input to numbers
@@ -238,6 +238,7 @@ else:
     ER_p_K_r_theta_subgraph_log.write("<l1>")
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write("N/A")
+    ER_p_K_r_theta_subgraph_log.write("\n")
     print('N/A')
     
 
@@ -312,6 +313,7 @@ else:
     ER_p_K_r_theta_subgraph_log.write("<l2>")
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write("N/A")
+    ER_p_K_r_theta_subgraph_log.write("\n")
     print('N/A')    
 
 ##nx.is_connected(G)
@@ -385,6 +387,7 @@ else:
     ER_p_K_r_theta_subgraph_log.write("<l3>")
     ER_p_K_r_theta_subgraph_log.write(" ")
     ER_p_K_r_theta_subgraph_log.write("N/A")
+    ER_p_K_r_theta_subgraph_log.write("\n")
     print('N/A')
 
 
@@ -611,6 +614,7 @@ f9.savefig("average_x_t.pdf" )
 
 ##Compute graph properties for the overall network
 ER_p_K_r_theta = open("ER_p_k_r_theta_9_26_24.tsv", "a")
+ER_p_K_r_theta.write("\n")
 ER_p_K_r_theta.write("rep-%01d"%(rep))
 ER_p_K_r_theta.write("\n")
 ER_p_K_r_theta.write("p")
@@ -650,6 +654,10 @@ ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("num_switches")
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write("num_oscillators")
+ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("mean_x_init")
+ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write("SD_x_init")
 ER_p_K_r_theta.write("\n")
 
 ER_p_K_r_theta.write(str(p))
@@ -735,6 +743,10 @@ ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write(str(num_switches))
 ER_p_K_r_theta.write("\t")
 ER_p_K_r_theta.write(str(num_oscillators))
+ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write(str(mean_x_init))
+ER_p_K_r_theta.write("\t")
+ER_p_K_r_theta.write(str(SD_x_init))
 ER_p_K_r_theta.write("\n")
 
 ER_p_K_r_theta.close()
