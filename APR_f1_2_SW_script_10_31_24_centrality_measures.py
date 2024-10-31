@@ -816,10 +816,9 @@ for t in range(T):
 
 
 #perform autocorrelation  and cross correlation analysis of order parameters, specifically the switch order param
-rx_auto_corr=np.correlate(r_x_list, r_x_list, mode='full')/(max(np.correlate(r_x_list, r_x_list, mode='full')))
-r_theta_auto_corr=np.correlate(r_theta_list, r_theta_list, mode='same')/(max(np.correlate(r_x_list, r_x_list, mode='full')))
+rx_auto_corr=np.correlate(r_x_list, r_x_list, mode='same')/(max(np.correlate(r_x_list, r_x_list, mode='same')))
+r_theta_auto_corr=np.correlate(r_theta_list, r_theta_list, mode='same')/(max(np.correlate(r_theta_list, r_theta_list, mode='same')))
 order_param_crosscorr=np.correlate(r_x_list, r_theta_list, mode='same')/(max(np.correlate(r_x_list, r_theta_list, mode='same')))
-
 
 
 #perform fourier analysis of the switch order parameter
