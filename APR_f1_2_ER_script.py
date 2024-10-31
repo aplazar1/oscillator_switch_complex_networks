@@ -92,8 +92,9 @@ print(num_switches)
 pos1 = nx.circular_layout(G1)
 
  
-plt.figure(figsize = (12, 12))
-nx.draw_networkx(G1, pos1, node_color=Node_colors)        
+figure0=plt.figure(figsize = (12, 12))
+nx.draw_networkx(G1, pos1, node_color=Node_colors)  
+figure0.savefig("full_ER_graph_node_colors.pdf" )       
 
 ##initial oscillator-oscillator coupling k(0)
 K_t_init=4
