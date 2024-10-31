@@ -23,12 +23,12 @@ import networkx as nx
 
 
 ##testing params
-#200,0.01,2,1,4,100,10,3.2,0,-100,5,1,1.5,1,0.01,50
+#200,0.03,2,1,4,100,10,3.2,0,-100,5,1,1.5,1,0.01,50
 
 ##model parameters from user input
 print('here we sample X init and omega init from a normal distribution')
 print('input the model parameters below')
-print("enter  simulation parameters: total_nodes, p, <k>, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, M, N, eta, tau, dt, secs, respectively, separated by commas")
+print("enter  simulation parameters: total_nodes, p, <k>, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs, respectively, separated by commas")
 total_nodes, p, avg_k, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs =input().split(',')
 
 #convert input to numbers
@@ -198,7 +198,7 @@ for i in range(G1.number_of_nodes()):
                 switch_switch_subgraph=nx.compose(switch_switch_subgraph, H)
 
 ##compute and store subgraph parameters
-SW_p_K_r_theta_subgraph_log = open("SW_k_fixed1_increasing_p_rtheta_10_01_24_subgraph_parameters_log.txt", "a")
+SW_p_K_r_theta_subgraph_log = open("SW_p_fixed_increasing_k_rtheta_10_01_24_subgraph_parameters_log.txt", "a")
 SW_p_K_r_theta_subgraph_log.write("rep-%01d"%(rep))
 SW_p_K_r_theta_subgraph_log.write("\n")
 ##1 oscillator-oscillator subgraph         
@@ -239,6 +239,7 @@ else:
     SW_p_K_r_theta_subgraph_log.write("<l1>")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n") 
     print('N/A')
     
 
@@ -313,6 +314,7 @@ else:
     SW_p_K_r_theta_subgraph_log.write("<l2>")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
     print('N/A')    
 
 ##nx.is_connected(G)
@@ -386,6 +388,7 @@ else:
     SW_p_K_r_theta_subgraph_log.write("<l3>")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
     print('N/A')
 
 
@@ -611,7 +614,7 @@ plt.ylabel(' average switch state <x(t)>')
 f9.savefig("average_x_t.pdf" ) 
 
 ##Compute graph properties for the overall network
-SW_p_K_r_theta = open("SW_k_fixed1_increasing_p_rtheta_10_1_24.tsv", "a")
+SW_p_K_r_theta = open("SW_p_fixed_increasing_k_rtheta_10_28_24.tsv", "a")
 SW_p_K_r_theta.write("rep-%01d"%(rep))
 SW_p_K_r_theta.write("\n")
 SW_p_K_r_theta.write("p")
@@ -651,6 +654,10 @@ SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write("num_switches")
 SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write("num_oscillators")
+SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write("mean_x_init")
+SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write("SD_x_init")
 SW_p_K_r_theta.write("\n")
 
 SW_p_K_r_theta.write(str(p))
@@ -736,6 +743,10 @@ SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write(str(num_switches))
 SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write(str(num_oscillators))
+SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write(str(mean_x_init))
+SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write(str(SD_x_init))
 SW_p_K_r_theta.write("\n")
 
 SW_p_K_r_theta.close()
@@ -743,3 +754,4 @@ SW_p_K_r_theta_subgraph_log.close()
 
 ##export the generated graph in multi-line adjacency format for further use
 nx.write_gexf(G1, "SW_10_1_24.gexf")
+
