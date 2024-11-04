@@ -489,7 +489,6 @@ for t in range(1, T):
                         switch_switch_influence=(h[i][n]*x_t_discrete[t-1, switch_num])/num_switch_switch_neighborgs
                         switch_neighborg_infl.append(switch_switch_influence)
                     elif G1.nodes.data("classification")[n]=='oscillator':
-                        num_switch_oscillator_neighborgs=num_switch_oscillator_neighborgs+1
                         oscillator_switch_influence=(h[i][n]*np.sin(theta_t[t-1] - Beta[switch_num]))/num_switch_oscillator_neighborgs
                         oscillator_neighborg_infl.append(oscillator_switch_influence)
                         switch_oscillator_influence=(h[i][n]*x_t_discrete[t-1, switch_num])/num_switch_oscillator_neighborgs
