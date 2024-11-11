@@ -1127,6 +1127,21 @@ elif len(nodes_max_degcen)==1:
              #print(len(r_i_x_list))
              rx_hub_overall.append(np.sum(r_i_x_list)/switch_switch_subgraph.degree(i)) ##G1.degree(i)
 
+
+##convert hub time series to dataframe an export as csv
+import pandas as pd
+rx_hub_switch_subgraph_df=pd.DataFrame(rx_hub_switch_subgraph)
+rx_hub_switch_subgraph_df.to_csv('switch_subgraph_hub_order_param_time_series.csv')
+
+r_theta_hub_oscillator_subgraph_df=pd.DataFrame(r_theta_hub_oscillator_subgraph)
+r_theta_hub_oscillator_subgraph_df.to_csv('oscillator_subgraph_hub_order_param_time_series.csv')
+
+rx_hub_overall_df=pd.DataFrame(rx_hub_overall)
+rx_hub_overall_df.to_csv('switch_full_graph_hub_order_param_time_series.csv')
+
+r_theta_hub_overall_df=pd.DataFrame(r_theta_hub_overall)
+r_theta_hub_overall_df.to_csv('oscillator_full_graph_hub_order_param_time_series.csv')
+
 ##now plot the HUB order parameters 
 ##oscillator-oscillator subgraph
 f12=plt.figure(figsize=(10,10))
