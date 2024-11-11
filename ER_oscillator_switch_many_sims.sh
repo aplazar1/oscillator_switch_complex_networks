@@ -4,15 +4,15 @@
 ##Here we will run the Tarlor, Fertig, Restrepo model on ER graphs varying both p and mean_x_init
 initial_p=0.01
 inc_p=0.05
-end_p=165
+end_p=0.36
 
-initial_mean_x_initl=-10
+initial_mean_x_init=-10
 inc_mean_x_init=1
 end=10
 
 initial_rep=1
 inc_rep=1
-end_rep=3
+end_rep=4
 
 
 
@@ -29,7 +29,7 @@ do
      ##user input order: total_nodes, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs
      ./f1_2_ER_script_11_9_24_centrality_measures_correct_index.py <<< "200,${i},${h},4,100,10,3.2,0,${j},5,1,1.5,1,0.01,50"
      cd ../
+    done
+  done
 done
 echo "finished sequence"
-
-
