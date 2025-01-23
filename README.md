@@ -7,3 +7,5 @@ Steps to reproduce data:
 3) Run the figure_gen script to plot data (from many aggregate simulations).
 
 Note: The f4 B_lag scripts implement differently uniformly sampled phase-lags between pairs of connected oscillators and switches, while the B_set_lag scripts implement the same phase-lag for all pairs of connected oscillators and switches (selected by sampling once from a uniform distribution).
+
+*The Many_sims.sh shell scripts run many iterations of the python scripts solving an euler scheme of the TFR model while varying over graph parameters and model initialization parameters.
