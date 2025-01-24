@@ -6,9 +6,9 @@ initial_p=0.01
 inc_p=0.05
 end_p=0.36
 
-initial_mean_x_init=-10
+initial_mean_x_init=-3
 inc_mean_x_init=1
-end=10
+end=3
 
 initial_rep=1
 inc_rep=1
