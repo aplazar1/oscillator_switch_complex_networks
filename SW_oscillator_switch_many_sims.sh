@@ -6,9 +6,9 @@ initial_k=5
 inc_k=5
 end_k=40
 
-initial_mean_x_init=-10
+initial_mean_x_init=-3
 inc_mean_x_init=1
-end=10
+end=3
 
 initial_rep=1
 inc_rep=1
