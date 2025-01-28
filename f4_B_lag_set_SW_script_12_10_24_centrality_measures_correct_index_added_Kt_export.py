@@ -119,10 +119,6 @@ Kxx=3.2
 #threshold for switch activation
 eta=1.5
 
-##time for oscillator-oscillator coupling adaptation
-##for Figure 2 set to 1, otherwise, tau=np.max([1, omega_0])
-tau=1
-
 ##phase lag beta
 Beta=rn.choice(np.random.uniform(0, 2*np.pi, num_switches), size=1)
 
