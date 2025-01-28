@@ -99,25 +99,11 @@ pos1 = nx.circular_layout(G1)
  
 figure0=plt.figure(figsize = (12, 12))
 nx.draw_networkx(G1, pos1, node_color=Node_colors) 
-figure0.savefig("full_SW_graph_node_colors.pdf" )          ##10/31  
+figure0.savefig("full_SW_graph_node_colors.pdf" )        
 
-##initial oscillator-oscillator coupling k(0)
-K_t_init=4
-
-
-omega_0=5
-delta_scale=1
+##initialize IC sampling distributions
 # Define the natural frequencies of the oscillators
-omega_init =scp.cauchy.rvs(loc=omega_0, scale=delta_scale, size=num_oscillators)
-
-# Define the coupling strength
-K=100
-K_max=K ##K_max is the oscillator-oscillator critical coupling constant
-Kx_theta=10
-Kxx=3.2
-
-#threshold for switch activation
-eta=1.5
+omega_init =scp.cauchy.rvs(loc=mean_omega, scale=sigma_omega, size=num_oscillators)
 
 ##phase lag beta
 Beta=rn.choice(np.random.uniform(0, 2*np.pi, num_switches), size=1)
@@ -132,8 +118,6 @@ theta_init = np.random.uniform(0, 2*np.pi, num_oscillators)
 x_t_init = np.random.normal(mean_x_init,SD_x_init, num_switches)
 
 # Define the time step and the number of time steps
-dt = 0.01
-secs=50  ###number of "real time" seconds to simulate
 T = int(secs/dt)  #number of steps needed= real time seconds/time step; 100/0.01=10000 total steps
                
                
