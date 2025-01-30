@@ -10,4 +10,4 @@ Note: The f4 B_lag scripts implement differently uniformly sampled phase-lags be
 
 *The Many_sims.sh shell scripts run many iterations of the python scripts solving an euler scheme of the TFR model while varying over graph parameters and model initialization parameters.
 
-Requirements to run scripts:python 3.12.7, numpy, matplotlib, matplotlib.pyplot, matplotlib.ticker, scipy.stats, networkx
+Requirements to run scripts: python 3.12.7, numpy, matplotlib, matplotlib.pyplot, matplotlib.ticker, scipy.stats, networkx
