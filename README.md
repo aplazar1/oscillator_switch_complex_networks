@@ -10,4 +10,6 @@ Note: The f4 B_lag scripts implement differently uniformly sampled phase-lags be
 
 *The Many_sims.sh shell scripts run many iterations of the python scripts solving an euler scheme of the TFR model while varying over graph parameters and model initialization parameters.
 
+*The file "General_script_input_adjacency_1_28_25_APR.py" solves the TFR model using an adjacency matrix input as csv file. It also takes as input model coupling constants and initial conditions to initialize the model. In addition, the script also asks for the user to input the ratio of oscillators to switches. This is a non-trivial parameter and will affect the model output. This ratio of oscillators to switches would need to be curated from prior biological knowledge.
+
 Requirements to run scripts: python 3.12.7, numpy, matplotlib, matplotlib.pyplot, matplotlib.ticker, scipy.stats, networkx
