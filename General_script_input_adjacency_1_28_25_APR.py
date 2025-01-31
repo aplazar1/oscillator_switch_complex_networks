@@ -23,7 +23,7 @@ import networkx as nx
 
 ##model parameters from user input
 print('here we sample X init and omega init from a normal distribution')
-print("enter  simulation parameters: total_nodes, k, power_law1, power_law2, inter_community_edges, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs, respectively, separated by commas")
+print("enter  simulation parameters: total_nodes, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs, respectively, separated by commas")
 total_nodes, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs =input().split(',')
 
 ##determine beta setting: set, uniform,zero
