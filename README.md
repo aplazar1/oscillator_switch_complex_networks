@@ -1,6 +1,13 @@
 # Paper1_oscillator_switch_theory
 Repo containing code for runing simulations, data analysis and figure generation for my first post-doc theory paper of the Taylor-Fertig-Restrepo oscillator switch model adapted to complex networks.
 
+Prepare the environment, e.g for running in a Docker container interactively:
+```
+docker run -it -v ./:/ost --workdir /ost continuumio/miniconda3 /bin/bash
+conda create -n python_env python=3.12.7 numpy matplotlib scipy networkx
+conda activate python_env
+```
+
 Main script to run simulations: The file "General_script_input_adjacency_1_28_25_APR.py" solves the TFR model using an adjacency matrix input as csv file. It also takes as input model coupling constants and initial conditions to initialize the model. In addition, the script also asks for the user to input the ratio of oscillators to switches. This is a non-trivial parameter and will affect the model output. This ratio of oscillators to switches would need to be curated from prior biological knowledge.
 
 Steps to reproduce paper data: 
