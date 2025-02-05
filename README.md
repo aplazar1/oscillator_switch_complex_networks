@@ -4,7 +4,7 @@ Repo containing code for runing simulations, data analysis and figure generation
 Main script to run simulations: The file "General_script_input_adjacency_1_28_25_APR.py" solves the TFR model using an adjacency matrix input as csv file. It also takes as input model coupling constants and initial conditions to initialize the model. In addition, the script also asks for the user to input the ratio of oscillators to switches. This is a non-trivial parameter and will affect the model output. This ratio of oscillators to switches would need to be curated from prior biological knowledge.
 
 Steps to reproduce paper data: 
-1) Run the f1_2 (figure 1,2) scripts to run the TFR model on Erdos-Renyi (ER), Small-world (SW),  and Lancichinetti–Fortunato–Radicchi graphs (LFR).
+1) Run the f1_2 simulations(figure 1,2) scripts to run the TFR model on Erdos-Renyi (ER), Small-world (SW),  and Lancichinetti–Fortunato–Radicchi graphs (LFR).
 2) Run the collect_metadata_for_large_scale_analysis.py script to condense metadata from many separate simulation csv files and group into a single csv file.
 3) Run the figure_gen script to plot data (from many aggregate simulations).
 
