@@ -24,7 +24,7 @@ import networkx as nx
 
 
 
-##Model default params in the order described below:200,5,2.5,2.5,0.8,1,4,100,10,3.2,0,-100,5,1,1.5,1,0.01,50
+##Model default params in the order described below:200,5,2.5,2.5,0.9,1,4,100,10,3.2,0,100,5,1,1.5,1,0.01,50
 #The model parameter mean_x_init can be selected to be positive, zero, or a negative number by the user. Selecting a negative value will 
 #initialize all the switches in the "off state" (smaller than -1), selecting zero will initialize some switches in "off" and others in "on state".
 ##Finally, selecting a positive value for this parameter (larger than 1) will initialize all switches in the "on state".
