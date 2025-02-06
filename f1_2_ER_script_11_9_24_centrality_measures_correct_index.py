@@ -25,8 +25,10 @@ import scipy.stats as scp
 import networkx as nx
 
 
-##testing params
-#200,0.3,1,4,100,10,3.2,0,-100,5,1,1.5,1,0.01,50
+##Model default params in the order described below:200,0.3,1,4,100,10,3.2,0,mean_x_init,5,1,1.5,1,0.01,50
+#The model parameter mean_x_init can be selected to be positive, zero, or a negative number by the user. Selecting a negative value will 
+#initialize all the switches in the "off state" (smaller than -1), selecting zero will initialize some switches in "off" and others in "on state".
+##Finally, selecting a positive value for this parameter (larger than 1) will initialize all switches in the "on state".
 
 ##model parameters from user input
 print('here we sample X init and omega init from a normal and cauchy distribution, respectively')
@@ -70,7 +72,6 @@ for i in range(0, int(G1.number_of_nodes())):
         G1.add_node(i, classification='oscillator', color='blue')
     else:
         G1.add_node(i, classification='switch', color='red')
-        #print(i)
 
 ##create the list of colors for plotting
 Node_colors=[]
@@ -127,57 +128,34 @@ switch_oscillator_subgraph=nx.empty_graph()
 
 for i in range(G1.number_of_nodes()):
     if G1.nodes.data("classification")[i]=='oscillator':
-        #print(G1.nodes.data("classification")[i])
-        #print(i)
         neighbors=list(G1.neighbors(i))
-        #print(neighbors)
         subgraph_list1=[i]
         subgraph_list2=[i]
         for n in neighbors:
-            #print(n)
             if G1.nodes.data("classification")[n]=='oscillator':
-                #print(n)
-                #print(G1.nodes.data("classification")[n])
                 subgraph_list1.append(n)
             if len(subgraph_list1)>1:
                 H=G1.subgraph(subgraph_list1)
-                #print(H.edges)
                 oscillator_oscillator_subgraph=nx.compose(oscillator_oscillator_subgraph, H)
-            #print(n)
             if G1.nodes.data("classification")[n]=='switch':
-                #print(n)
-                #print(G1.nodes.data("classification")[n])
                 subgraph_list2.append(n)
             if len(subgraph_list2)>1:
                 H=G1.subgraph(subgraph_list2)
-                #print(H.edges)
                 oscillator_switch_subgraph=nx.compose(oscillator_switch_subgraph, H)
     if G1.nodes.data("classification")[i]=='switch':
-        #print(G1.nodes.data("classification")[i])
-        #print(i)
         neighbors=list(G1.neighbors(i))
-        #print(neighbors)
         subgraph_list1=[i]
         subgraph_list2=[i]
         for n in neighbors:
-            #print(n)
             if G1.nodes.data("classification")[n]=='oscillator':
-                #print(n)
-                #print(type(n))
-                #print(G1.nodes.data("classification")[n])
                 subgraph_list1.append(n)
             if len(subgraph_list1)>1:
                 H=G1.subgraph(subgraph_list1)
-                #print(H.edges)
                 switch_oscillator_subgraph=nx.compose(switch_oscillator_subgraph, H)
-            #print(n)
             if G1.nodes.data("classification")[n]=='switch':
-                #print(n)
-                #print(G1.nodes.data("classification")[n])
                 subgraph_list2.append(n)
             if len(subgraph_list2)>1:
                 H=G1.subgraph(subgraph_list2)
-                #print(H.edges)
                 switch_switch_subgraph=nx.compose(switch_switch_subgraph, H)
 
 
@@ -471,16 +449,11 @@ for t in range(0, T):
     if t==0:
         oscillator_num=0
         switch_num=0
-        #print(t)
         for i in range(G1.number_of_nodes()):
             if G1.nodes.data("classification")[i]=='oscillator':
-                #print(i)
-                #print(oscillator_num)
                 model_state_t[t,i]=theta_init[oscillator_num]
                 oscillator_num=oscillator_num+1
             elif G1.nodes.data("classification")[i]=='switch':
-                #print(i)
-                #print(switch_num)
                 model_state_t[t,i]=x_t_init[switch_num]
                 ##clasify states as boolean discrete
                 if model_state_t[t,i] <= 0:
@@ -498,26 +471,17 @@ for t in range(0, T):
             if G1.nodes.data("classification")[i]=='oscillator':
                 oscillator_oscillator_neighborg_contributions=[]
                 neighbors=list(G1.neighbors(i))
-                #print(neighbors)
                 if len(neighbors)> 0: 
                     neighborg_classification=[G1.nodes.data("classification")[n] for n in neighbors]
                     num_oscillator_oscillator_neighborgs=neighborg_classification.count("oscillator")
                     #r_link=[]
-                    #print(neighbors)
-                    #print(num_oscillator_oscillator_neighborgs)
                     for n in neighbors:
-                        #print(G1.nodes.data("classification")[n])
-                        #print(i)
-                        #print(n)
                         if G1.nodes.data("classification")[n]=='oscillator':
-                            #print((i,n))
-                            #print(oscillator_oscillator_neighborg_contributions)
                             ##oscillator rate of phase change with time
                             oscillator_neighborg_contribution=(h[i][n]*np.sin(model_state_t[t-1, n] - model_state_t[t-1, i]))/num_oscillator_oscillator_neighborgs
                             oscillator_oscillator_neighborg_contributions.append(oscillator_neighborg_contribution)    
                     model_state_t[t,i] = (model_state_t[t-1, i] + dt*(omega_init[oscillator_num] + ((K_t[t-1])*np.sum(oscillator_oscillator_neighborg_contributions))))%(2*np.pi)
                     theta_t[t, oscillator_num]=model_state_t[t, i]
-                    #print(len(oscillator_oscillator_neighborg_contributions))
                 elif len(neighbors)==0: 
                     model_state_t[t, i] = (model_state_t[t-1, i] + dt*(omega_init[oscillator_num]))%(2*np.pi)
                     theta_t[t, oscillator_num]=model_state_t[t, i]
@@ -529,22 +493,14 @@ for t in range(0, T):
                     neighborg_classification=[G1.nodes.data("classification")[n] for n in neighbors]
                     num_switch_oscillator_neighborgs=neighborg_classification.count('oscillator')
                     num_switch_switch_neighborgs=neighborg_classification.count('switch')
-                    #print(num_switch_oscillator_neighborgs)
-                    #print(num_switch_switch_neighborgs)
                     switch_neighborg_infl=[]
                     oscillator_neighborg_infl=[]
                     for n in neighbors:
-                        #print(n)
-                        #print((i,n))
-                        #print(len(switch_neighborg_infl))
                         if G1.nodes.data("classification")[n]=='switch': 
-                            
                             if model_state_t[t-1,n]>0:
                                 l=1
                                 switch_switch_influence=(h[i][n]*l)/num_switch_switch_neighborgs
                                 switch_neighborg_infl.append(switch_switch_influence)
-                              #print(i)
-                              #print(n)
                             else: 
                                 l=0  ###do i want this to be an else if statement?
                                 switch_switch_influence=(h[i][n]*l)/num_switch_switch_neighborgs
@@ -561,8 +517,7 @@ for t in range(0, T):
                                 switch_oscillator_influence=(h[i][n]*l)/num_switch_oscillator_neighborgs
                                 switch_oscillator_K_infl.append(switch_oscillator_influence)           
                     model_state_t[t,i] = model_state_t[t-1, i] + dt*(-model_state_t[t-1,i] - eta +  (Kxx)*np.sum(switch_neighborg_infl) +  (Kx_theta)*np.sum(oscillator_neighborg_infl))  
-                    x_t[t,switch_num]=model_state_t[t,i] 
-                    #print(len(switch_neighborg_infl))                                                                                     
+                    x_t[t,switch_num]=model_state_t[t,i]                                                                                     
                 elif len(neighbors)==0:
                     model_state_t[t,i] = model_state_t[t-1, i] + dt*(-model_state_t[t-1,i] - eta )
                     x_t[t,switch_num]=model_state_t[t,i] 
@@ -608,12 +563,8 @@ r_x_list=[]
 #Note: I found that the mean field order parameters characterized the state of the system well
 ##for both well connected and sparsely connected graphs
 for t in range(T):
-        #print(t)
         ##for this order parameter, we sum over all oscillators frequencies at a given time
-        #print(np.sum(np.exp(1j*theta_t_pie[t])))
-        #print(np.exp(1j*psi[t]))
         r_theta=abs((1/num_oscillators)*np.sum(np.exp(1j*theta_t_pie[t]-1j*psi[t])))
-        #print(r_theta)
         r_theta_list.append(r_theta)
         ##switch order parameter
         r_x=(np.sum(x_t_discrete[t])/num_switches)
@@ -947,23 +898,14 @@ if len(nodes_max_degcen1)>1:
     r_theta_hub_oscillator_subgraph=np.zeros((T, len(nodes_max_degcen1)))
     for i in oscillator_oscillator_subgraph.nodes():
         if i in nodes_max_degcen1:
-            #print(i)
             for t in range(0,T):
                 r_i_theta_list=[]
                 for j in oscillator_oscillator_subgraph.nodes():
                     if i!=j:  
                         r_i_theta=abs(h[i][j]*np.exp(1j*model_state_t[t, j]-1j*model_state_t[t, i]))
                         r_i_theta_list.append(r_i_theta)
-                        #print(r_i_theta)
-                        #print(h[i][j])
-                        #print((i,j))
                 r_theta_hub=np.sum(r_i_theta_list)/oscillator_oscillator_subgraph.degree(i)
-                #print(np.sum(r_i_theta_list))
-                #print(oscillator_oscillator_subgraph.degree(i))
-                #print(r_theta_hub)
-                #print(hub_num)
                 r_theta_hub_oscillator_subgraph[t,hub_num]=r_theta_hub
-            #print(hub_num)
             hub_num=hub_num+1
         
 elif len(nodes_max_degcen1)==1:
@@ -977,17 +919,7 @@ elif len(nodes_max_degcen1)==1:
                     if i!=j: 
                         r_i_theta=abs(h[i][j]*np.exp(1j*model_state_t[t, j]-1j*model_state_t[t, i]))
                         r_i_theta_list.append(r_i_theta)
-                        #print(r_i_theta)
-                        #print(r_i_theta_list)
-                        #print(len(r_i_theta_list))
-                        #print(np.sum(r_i_theta_list)/num_oscillators)
-                        #print((i,j))
-                #print(t)
-                #print(len(r_i_theta_list))
-                #print(np.sum(r_i_theta_list))
-                #print(oscillator_oscillator_subgraph.degree(i))
                 r_theta_hub=np.sum(r_i_theta_list)/oscillator_oscillator_subgraph.degree(i)
-                #print(r_theta_hub)
                 r_theta_hub_oscillator_subgraph.append(r_theta_hub)
             
 
@@ -1025,7 +957,6 @@ elif len(nodes_max_degcen3)==1:
                         else:
                             l=0
                             r_i_x_list.append(h[i][j]*l)
-                    #print(len(r_i_x_list))
                     rx_hub_switch_subgraph.append(np.sum(r_i_x_list)/switch_switch_subgraph.degree(i))
 
 
@@ -1050,12 +981,8 @@ if len(nodes_max_degcen)>1:
                     if G1.nodes.data("classification")[j]=='oscillator' and i!=j:  
                             r_i_theta=abs(h[i][j]*np.exp(1j*model_state_t[t, j]-1j*model_state_t[t, i]))
                             r_i_theta_list.append(r_i_theta)
-                            #print(r_i_theta)
-                            #print(h[i][j])
-                #print(len(r_i_theta_list))
                 r_theta_hub=np.sum(r_i_theta_list)/oscillator_oscillator_subgraph.degree(i)
                 r_theta_hub_overall[t,oscillator_hubs]=r_theta_hub
-                #print(hub_num)
              oscillator_hubs=oscillator_hubs+1
             if G1.nodes.data("classification")[i]=='switch':
              for t in range(0,T):
@@ -1068,7 +995,6 @@ if len(nodes_max_degcen)>1:
                         else:
                            l=0
                            r_i_x_list.append(h[i][j]*l)
-                #print(len(r_i_x_list))
                 rx_hub_overall[t,switch_hubs]=np.sum(r_i_x_list)/switch_switch_subgraph.degree(i)
              switch_hubs=switch_hubs+1
            
@@ -1076,7 +1002,6 @@ elif len(nodes_max_degcen)==1:
     print("1  hub")
     for i in G1.nodes():
         if i in nodes_max_degcen:
-         #print(i)
          rx_hub_overall=[]
          r_theta_hub_overall=[]
          if G1.nodes.data("classification")[i]=='oscillator':
@@ -1086,12 +1011,7 @@ elif len(nodes_max_degcen)==1:
                  if G1.nodes.data("classification")[j]=='oscillator' and i!=j:  
                          r_i_theta=abs(h[i][j]*np.exp(1j*model_state_t[t, j]-1j*model_state_t[t, i]))
                          r_i_theta_list.append(r_i_theta)
-                         #print(r_i_theta)
-                         #print(h[i][j])
-             #print(len(r_i_theta_list))
              r_theta_hub=np.sum(r_i_theta_list)/oscillator_oscillator_subgraph.degree(i) ##G1.degree(i)
-             #print(np.sum(r_i_theta_list))
-             #print(oscillator_oscillator_subgraph.degree(i))
              r_theta_hub_overall.append(r_theta_hub)
          if G1.nodes.data("classification")[i]=='switch':
           for t in range(0,T):
@@ -1104,7 +1024,6 @@ elif len(nodes_max_degcen)==1:
                      else:
                         l=0
                         r_i_x_list.append(h[i][j]*l)
-             #print(len(r_i_x_list))
              rx_hub_overall.append(np.sum(r_i_x_list)/switch_switch_subgraph.degree(i)) ##G1.degree(i)
 
 
