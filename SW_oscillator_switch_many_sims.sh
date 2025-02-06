@@ -2,6 +2,8 @@
 ##create a new directory indicative of the condition run
 ##and run the code with the given conditions/constants
 ##Here we will run the Tarlor, Fertig, Restrepo model on SW graphs varying both p and mean_x_init
+
+#Note: This bash script is meant to be run in the directory where the python script f1_2_SW_script_11_9_24_centrality_measures_correct_index.py is located.
 initial_k=5
 inc_k=5
 end_k=40
@@ -23,7 +25,7 @@ do
     for h in $(seq $initial_rep $inc_rep $end_rep)
     do 
      mkdir SW_k${i}_mean_x_init_${j}_rep_${h}
-     cp f1_2_SW_script_11_9_24_centrality_measures_correct_index.py /home/aplazar1/data_gsteino1/aplazar1/oscillator_code/SW_oscillator_switch/SW_k${i}_mean_x_init_${j}_rep_${h}
+     cp f1_2_SW_script_11_9_24_centrality_measures_correct_index.py ./SW_k${i}_mean_x_init_${j}_rep_${h}
      cd SW_k${i}_mean_x_init_${j}_rep_${h}
      ##run the script and input the constants
      ##user input order: total_nodes,k, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs
