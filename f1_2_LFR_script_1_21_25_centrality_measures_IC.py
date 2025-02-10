@@ -7,7 +7,7 @@ Created on Tue Jan 21 12:17:19 2025
 """
 
 ##Author: Alma Plaza-Rodriguez
-
+#Note: 2/10/25 I have added the calculation of information centrality to this script for both the subgraphs and full graph
 ## Figure 1 Script for Complex Network Oscillator switch paper
 ##Modular LFR graphs
 
