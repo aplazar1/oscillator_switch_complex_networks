@@ -201,11 +201,39 @@ if nx.is_connected(oscillator_oscillator_subgraph):
     LFR_p_K_r_theta_subgraph_log.write("l1")
     LFR_p_K_r_theta_subgraph_log.write(" ")
     LFR_p_K_r_theta_subgraph_log.write(str(l1))
+    LFR_p_K_r_theta_subgraph_log.write("\n")
+    ##calculate the information centrality
+    InfCen1=nx.information_centrality(oscillator_oscillator_subgraph)
+    InfCen_sorted1=dict(sorted(InfCen1.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen1 = [k for k, v in InfCen_sorted1.items() if v == max(InfCen_sorted1.values())]
+    Max_InfCen1=max(InfCen_sorted1.values())
+    print("nodes_with_max_information_centrality1")
+    print(nodes_max_InfCen1)
+    print("Max_information_centrality1")
+    print(Max_InfCen1)  
+
+    LFR_p_K_r_theta_subgraph_log.write("Max_infromation_centrality1")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write(str(Max_InfCen1))
+    LFR_p_K_r_theta_subgraph_log.write("\n") 
+    LFR_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality1")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write(str(nodes_max_InfCen1))
     LFR_p_K_r_theta_subgraph_log.write("\n") 
 
     
 else:
     LFR_p_K_r_theta_subgraph_log.write("<l1>")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write("N/A")
+    LFR_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    LFR_p_K_r_theta_subgraph_log.write("Max_infromation_centrality1")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write("N/A")
+    LFR_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    LFR_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality1")
     LFR_p_K_r_theta_subgraph_log.write(" ")
     LFR_p_K_r_theta_subgraph_log.write("N/A")
     LFR_p_K_r_theta_subgraph_log.write("\n")
@@ -334,9 +362,37 @@ if nx.is_connected(switch_switch_subgraph):
     LFR_p_K_r_theta_subgraph_log.write(" ")
     LFR_p_K_r_theta_subgraph_log.write(str(l3))
     LFR_p_K_r_theta_subgraph_log.write("\n") 
+    ##calculate the information centrality
+    InfCen3=nx.information_centrality(switch_switch_subgraph)
+    InfCen_sorted3=dict(sorted(InfCen3.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen3 = [k for k, v in InfCen_sorted3.items() if v == max(InfCen_sorted3.values())]
+    Max_InfCen3=max(InfCen_sorted3.values())
+    print("nodes_with_max_information_centrality3")
+    print(nodes_max_InfCen3)
+    print("Max_information_centrality3")
+    print(Max_InfCen3)
+    LFR_p_K_r_theta_subgraph_log.write("Max_infromation_centrality3")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write(str(Max_InfCen3))
+    LFR_p_K_r_theta_subgraph_log.write("\n") 
+
+    LFR_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality3")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write(str(nodes_max_InfCen3))
+    LFR_p_K_r_theta_subgraph_log.write("\n")
     
 else:
     LFR_p_K_r_theta_subgraph_log.write("<l3>")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write("N/A")
+    LFR_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    LFR_p_K_r_theta_subgraph_log.write("Max_infromation_centrality3")
+    LFR_p_K_r_theta_subgraph_log.write(" ")
+    LFR_p_K_r_theta_subgraph_log.write("N/A")
+    LFR_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    LFR_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality3")
     LFR_p_K_r_theta_subgraph_log.write(" ")
     LFR_p_K_r_theta_subgraph_log.write("N/A")
     LFR_p_K_r_theta_subgraph_log.write("\n")
@@ -626,7 +682,7 @@ for t in range(len(xf)):
         fourier_correlation_analysys_LFR.write(str(rx_fft[t]))
         fourier_correlation_analysys_LFR.write("\t")
         fourier_correlation_analysys_LFR.write(str(x_fft[t]))
-    fourier_correlation_analysys_LFR.write("\n")
+    fourier_correlation_analysys_LFR.write("\t")
 
 
 
@@ -736,6 +792,10 @@ LFR_p_K_r_theta.write("C")
 LFR_p_K_r_theta.write("\t")
 LFR_p_K_r_theta.write("<l>")
 LFR_p_K_r_theta.write("\t")
+LFR_p_K_r_theta.write("max_InfCen")
+LFR_p_K_r_theta.write("\t")
+LFR_p_K_r_theta.write("nodes_with_max_information_centrality")
+LFR_p_K_r_theta.write("\t")
 LFR_p_K_r_theta.write("G kmax node")
 LFR_p_K_r_theta.write("\t")
 LFR_p_K_r_theta.write("kmax node type")
@@ -812,8 +872,30 @@ if nx.is_connected(G1):
     print("\n") 
     LFR_p_K_r_theta.write(str(l))
     LFR_p_K_r_theta.write("\t")
+    ##calculate the information centrality
+    InfCen=nx.information_centrality(G1)
+    InfCen_sorted=dict(sorted(InfCen.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen = [k for k, v in InfCen_sorted.items() if v == max(InfCen_sorted.values())]
+    Max_InfCen=max(InfCen_sorted.values())
+    print("nodes_with_max_information_centrality")
+    print(nodes_max_InfCen)
+    print("Max_information_centrality")
+    print(Max_InfCen)
+    
+
+    LFR_p_K_r_theta.write(str(Max_InfCen))
+    LFR_p_K_r_theta.write("\t") 
+
+    LFR_p_K_r_theta.write(str(nodes_max_InfCen))
+    LFR_p_K_r_theta.write("\t")   
     
 else:
+    LFR_p_K_r_theta.write("N/A")
+    LFR_p_K_r_theta.write("\t")
+    print('N/A')
+    LFR_p_K_r_theta.write("N/A")
+    LFR_p_K_r_theta.write("\t")
+    print('N/A')
     LFR_p_K_r_theta.write("N/A")
     LFR_p_K_r_theta.write("\t")
     print('N/A')
@@ -1128,10 +1210,10 @@ else:
 
 if len(np.shape(r_theta_hub_overall))>1:
     LFR_hub_order_params.write(str(np.mean(np.mean(r_theta_hub_overall[:-1000], axis=1), axis=0)))
-    LFR_hub_order_params.write("\n")
+    LFR_hub_order_params.write("\t")
 else:
     LFR_hub_order_params.write(str(np.mean(r_theta_hub_overall[:-1000])))
-    LFR_hub_order_params.write("\n")
+    LFR_hub_order_params.write("\t")
 
 
 LFR_p_K_r_theta.write(str(K_t_init))
@@ -1163,7 +1245,6 @@ LFR_p_K_r_theta.write("\t")
 LFR_p_K_r_theta.write(str(mean_x_init))
 LFR_p_K_r_theta.write("\t")
 LFR_p_K_r_theta.write(str(SD_x_init))
-LFR_p_K_r_theta.write("\n")
 
 
 
@@ -1203,7 +1284,6 @@ for t in range(T):
         order_param_corr_LFR.write(str(rx_auto_corr[t]))
         order_param_corr_LFR.write("\t")
         order_param_corr_LFR.write(str(order_param_crosscorr[t]))
-    order_param_corr_LFR.write("\n")
 
 LFR_p_K_r_theta.close()
 LFR_p_K_r_theta_subgraph_log.close()
