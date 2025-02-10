@@ -1284,6 +1284,7 @@ for t in range(T):
         order_param_corr_LFR.write(str(rx_auto_corr[t]))
         order_param_corr_LFR.write("\t")
         order_param_corr_LFR.write(str(order_param_crosscorr[t]))
+    order_param_corr_LFR.write("\n")
 
 LFR_p_K_r_theta.close()
 LFR_p_K_r_theta_subgraph_log.close()
