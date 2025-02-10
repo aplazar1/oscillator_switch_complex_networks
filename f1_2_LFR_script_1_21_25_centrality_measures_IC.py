@@ -1182,9 +1182,9 @@ LFR_hub_order_params.write("switch-switch subgraph hub complex <rx_eq>")
 LFR_hub_order_params.write("\t")
 LFR_hub_order_params.write("oscillator-oscillator hub subgraph complex <rtheta_eq>")
 LFR_hub_order_params.write("\t")
-LFR_hub_order_params.write("full graph hub hub complex <rx_eq>")
+LFR_hub_order_params.write("full graph hub complex <rx_eq>")
 LFR_hub_order_params.write("\t")
-LFR_hub_order_params.write("full graph hub rtheta complex <rx_eq>")
+LFR_hub_order_params.write("full graph hub <rtheta> complex")
 LFR_hub_order_params.write("\n")
 
 if len(np.shape(rx_hub_switch_subgraph))>1:
