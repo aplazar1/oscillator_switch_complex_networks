@@ -11,6 +11,7 @@ Created on Sat Nov  9 16:53:30 2024
 
 ## Figure 1 Script for Complex Network Oscillator switch paper
 ##SW graphs
+#Note: 2/10/25 I have added the calculation of information centrality to this script for both the subgraphs and full graph
 
 ##Note: Here I corrected the code for mistakes found in normalization of coupling constants
 ##normalization should be done according to the  degree of node, taking into account the 
@@ -224,11 +225,39 @@ if nx.is_connected(oscillator_oscillator_subgraph):
     SW_p_K_r_theta_subgraph_log.write("l1")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write(str(l1))
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    ##calculate the information centrality
+    InfCen1=nx.information_centrality(oscillator_oscillator_subgraph)
+    InfCen_sorted1=dict(sorted(InfCen1.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen1 = [k for k, v in InfCen_sorted1.items() if v == max(InfCen_sorted1.values())]
+    Max_InfCen1=max(InfCen_sorted1.values())
+    print("nodes_with_max_information_centrality1")
+    print(nodes_max_InfCen1)
+    print("Max_information_centrality1")
+    print(Max_InfCen1)  
+
+    SW_p_K_r_theta_subgraph_log.write("Max_infromation_centrality1")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write(str(Max_InfCen1))
+    SW_p_K_r_theta_subgraph_log.write("\n") 
+    SW_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality1")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write(str(nodes_max_InfCen1))
     SW_p_K_r_theta_subgraph_log.write("\n") 
 
     
 else:
     SW_p_K_r_theta_subgraph_log.write("<l1>")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    SW_p_K_r_theta_subgraph_log.write("Max_infromation_centrality1")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    SW_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality1")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write("N/A")
     SW_p_K_r_theta_subgraph_log.write("\n")
@@ -356,10 +385,38 @@ if nx.is_connected(switch_switch_subgraph):
     SW_p_K_r_theta_subgraph_log.write("<l3>")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write(str(l3))
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    ##calculate the information centrality
+    InfCen3=nx.information_centrality(switch_switch_subgraph)
+    InfCen_sorted3=dict(sorted(InfCen3.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen3 = [k for k, v in InfCen_sorted3.items() if v == max(InfCen_sorted3.values())]
+    Max_InfCen3=max(InfCen_sorted3.values())
+    print("nodes_with_max_information_centrality3")
+    print(nodes_max_InfCen3)
+    print("Max_information_centrality3")
+    print(Max_InfCen3)
+    SW_p_K_r_theta_subgraph_log.write("Max_infromation_centrality3")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write(str(Max_InfCen3))
+    SW_p_K_r_theta_subgraph_log.write("\n") 
+
+    SW_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality3")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write(str(nodes_max_InfCen3))
     SW_p_K_r_theta_subgraph_log.write("\n") 
     
 else:
     SW_p_K_r_theta_subgraph_log.write("<l3>")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    SW_p_K_r_theta_subgraph_log.write("Max_information_centrality3")
+    SW_p_K_r_theta_subgraph_log.write(" ")
+    SW_p_K_r_theta_subgraph_log.write("N/A")
+    SW_p_K_r_theta_subgraph_log.write("\n")
+    print('N/A')
+    SW_p_K_r_theta_subgraph_log.write("nodes_with_max_information_centrality3")
     SW_p_K_r_theta_subgraph_log.write(" ")
     SW_p_K_r_theta_subgraph_log.write("N/A")
     SW_p_K_r_theta_subgraph_log.write("\n")
@@ -781,6 +838,10 @@ SW_p_K_r_theta.write("C")
 SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write("<l>")
 SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write("max_InfCen")
+SW_p_K_r_theta.write("\t")
+SW_p_K_r_theta.write("nodes_with_max_information_centrality")
+SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write("G kmax node")
 SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write("kmax node type")
@@ -853,8 +914,30 @@ if nx.is_connected(G1):
     print("\n") 
     SW_p_K_r_theta.write(str(l))
     SW_p_K_r_theta.write("\t")
+    ##calculate the information centrality
+    InfCen=nx.information_centrality(G1)
+    InfCen_sorted=dict(sorted(InfCen.items(), key=lambda item: item[1],reverse=True))
+    nodes_max_InfCen = [k for k, v in InfCen_sorted.items() if v == max(InfCen_sorted.values())]
+    Max_InfCen=max(InfCen_sorted.values())
+    print("nodes_with_max_information_centrality")
+    print(nodes_max_InfCen)
+    print("Max_information_centrality")
+    print(Max_InfCen)
+    
+
+    SW_p_K_r_theta.write(str(Max_InfCen))
+    SW_p_K_r_theta.write("\t") 
+
+    SW_p_K_r_theta.write(str(nodes_max_InfCen))
+    SW_p_K_r_theta.write("\t")   
     
 else:
+    SW_p_K_r_theta.write("N/A")
+    SW_p_K_r_theta.write("\t")
+    print('N/A')
+    SW_p_K_r_theta.write("N/A")
+    SW_p_K_r_theta.write("\t")
+    print('N/A')
     SW_p_K_r_theta.write("N/A")
     SW_p_K_r_theta.write("\t")
     print('N/A')
@@ -1236,7 +1319,6 @@ SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write(str(mean_x_init))
 SW_p_K_r_theta.write("\t")
 SW_p_K_r_theta.write(str(SD_x_init))
-SW_p_K_r_theta.write("\n")
 
 
 
