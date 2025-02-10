@@ -682,7 +682,7 @@ for t in range(len(xf)):
         fourier_correlation_analysys_LFR.write(str(rx_fft[t]))
         fourier_correlation_analysys_LFR.write("\t")
         fourier_correlation_analysys_LFR.write(str(x_fft[t]))
-    fourier_correlation_analysys_LFR.write("\t")
+    fourier_correlation_analysys_LFR.write("\n")
 
 
 
@@ -1210,10 +1210,10 @@ else:
 
 if len(np.shape(r_theta_hub_overall))>1:
     LFR_hub_order_params.write(str(np.mean(np.mean(r_theta_hub_overall[:-1000], axis=1), axis=0)))
-    LFR_hub_order_params.write("\t")
+    LFR_hub_order_params.write("\n")
 else:
     LFR_hub_order_params.write(str(np.mean(r_theta_hub_overall[:-1000])))
-    LFR_hub_order_params.write("\t")
+    LFR_hub_order_params.write("\n")
 
 
 LFR_p_K_r_theta.write(str(K_t_init))
