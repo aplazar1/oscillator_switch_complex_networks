@@ -4,7 +4,7 @@ Repo containing code for runing simulations, data analysis and figure generation
 Prepare the environment, e.g for running in a Docker container interactively:
 ```
 docker run -it -v ./:/ost --workdir /ost continuumio/miniconda3 /bin/bash
-conda create -n python_env python=3.12.7 numpy matplotlib scipy networkx
+conda create -n python_env python=3.12.7 numpy matplotlib scipy networkx pandas
 conda activate python_env
 ```
 

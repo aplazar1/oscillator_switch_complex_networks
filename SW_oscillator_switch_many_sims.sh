@@ -29,7 +29,7 @@ do
      cd SW_k${i}_mean_x_init_${j}_rep_${h}
      ##run the script and input the constants
      ##user input order: total_nodes,k, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs
-     ./f1_2_SW_script_11_9_24_centrality_measures_correct_index.py <<< "200,${i},0.03,${h},4,100,10,3.2,0,${j},5,1,1.5,1,0.01,50"
+     python f1_2_SW_script_11_9_24_centrality_measures_correct_index.py <<< "200,${i},0.03,${h},4,100,10,3.2,0,${j},5,1,1.5,1,0.01,50"
      cd ../
     done
   done  
