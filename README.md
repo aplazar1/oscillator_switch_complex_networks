@@ -21,4 +21,4 @@ Note: The f3 (figure 3) B_lag scripts implement differently uniformly sampled ph
 
 
 
-Requirements to run scripts: python 3.12.7, numpy, matplotlib, matplotlib.pyplot, matplotlib.ticker, scipy.stats, networkx
+Requirements to run scripts: python 3.12.7, numpy, matplotlib, matplotlib.pyplot, matplotlib.ticker, scipy.stats, networkx, pandas
