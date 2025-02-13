@@ -23,7 +23,7 @@ do
     for h in $(seq $initial_rep $inc_rep $end_rep)
     do 
      mkdir LFR_k${i}_mean_x_init_${j}_rep_${h}
-     cp APR_f1_2_LFR_script_1_21_25_centrality_measures.py /home/aplazar1/data_gsteino1/aplazar1/oscillator_code/LFR_oscillator_switch/LFR_k${i}_mean_x_init_${j}_rep_${h}
+     cp APR_f1_2_LFR_script_1_21_25_centrality_measures.py ./LFR_k${i}_mean_x_init_${j}_rep_${h}
      cd LFR_k${i}_mean_x_init_${j}_rep_${h}
      ##run the script and input the constants
      ##user input order: total_nodes, k, power_law1, power_law2, inter_community_edges, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs, respectively, separated by commas
