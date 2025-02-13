@@ -23,7 +23,7 @@ do
     for h in $(seq $initial_rep $inc_rep $end_rep)
     do 
      mkdir ER_p${i}_mean_x_init_${j}_rep_${h}
-     cp f1_2_ER_script_11_9_24_centrality_measures_correct_index.py /home/aplazar1/data_gsteino1/aplazar1/oscillator_code/ER_oscillator_switch/ER_p${i}_mean_x_init_${j}_rep_${h}
+     cp f1_2_ER_script_11_9_24_centrality_measures_correct_index.py ./ER_p${i}_mean_x_init_${j}_rep_${h}
      cd ER_p${i}_mean_x_init_${j}_rep_${h}
      ##run the script and input the constants
      ##user input order: total_nodes, p, rep, K_t_init, K_theta_max,Kx_theta, Kxx, mean_omega, mean_x_init, sigma_omega, SD_x_init, eta, tau, dt, secs
