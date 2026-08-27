@@ -1,5 +1,5 @@
 # Paper1_oscillator_switch_theory
-Repo containing code for runing simulations, data analysis and figure generation for my first post-doc theory paper of the Taylor-Fertig-Restrepo oscillator switch model adapted to complex networks.
+Repo containing code for runing simulations, data analysis and figure generation of the Taylor-Fertig-Restrepo oscillator switch model adapted to complex networks.
 
 Prepare the environment, e.g for running in a Docker container interactively:
 ```
